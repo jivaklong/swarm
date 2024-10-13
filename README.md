@@ -2,16 +2,16 @@
 
 # Swarm (experimental, educational)
 
-An educational framework exploring ergonomic, lightweight multi-agent orchestration.
+一个探索人体工程学、轻量级多智能体编排的教育框架。
 
 > [!WARNING]
-> Swarm is currently an experimental sample framework intended to explore ergonomic interfaces for multi-agent systems. It is not intended to be used in production, and therefore has no official support. (This also means we will not be reviewing PRs or issues!)
+>Swarm目前是一个实验性的示例框架，旨在探索多智能体系统的人机工程学界面。它不打算用于生产，因此没有官方支持。（这也意味着我们不会审查PR或问题！）
 >
-> The primary goal of Swarm is to showcase the handoff & routines patterns explored in the [Orchestrating Agents: Handoffs & Routines](https://cookbook.openai.com/examples/orchestrating_agents) cookbook. It is not meant as a standalone library, and is primarily for educational purposes.
+>Swarm的主要目标是展示[编排代理：切换和例程]中探索的切换和例程模式(https://cookbook.openai.com/examples/orchestrating_agents)烹饪书。它不是一个独立的图书馆，主要用于教育目的。
 
 ## Install
 
-Requires Python 3.10+
+需要Python 3.10+
 
 ```shell
 pip install git+ssh://git@github.com/openai/swarm.git
@@ -73,39 +73,39 @@ What can I assist?
 
 # Overview
 
-Swarm focuses on making agent **coordination** and **execution** lightweight, highly controllable, and easily testable.
+Swarm致力于使代理**协调**和**执行**轻量级、高度可控且易于测试。
 
-It accomplishes this through two primitive abstractions: `Agent`s and **handoffs**. An `Agent` encompasses `instructions` and `tools`, and can at any point choose to hand off a conversation to another `Agent`.
+它通过两个基本抽象来实现这一点：“代理”和**切换**。“代理”包括“指令”和“工具”，可以在任何时候选择将对话交给另一个“代理”。
 
-These primitives are powerful enough to express rich dynamics between tools and networks of agents, allowing you to build scalable, real-world solutions while avoiding a steep learning curve.
+这些原语足够强大，可以表达工具和代理网络之间的丰富动态，使您能够构建可扩展的现实世界解决方案，同时避免陡峭的学习曲线。
 
 > [!NOTE]
-> Swarm Agents are not related to Assistants in the Assistants API. They are named similarly for convenience, but are otherwise completely unrelated. Swarm is entirely powered by the Chat Completions API and is hence stateless between calls.
+>Swarm代理与助理API中的助理无关。为了方便起见，它们的名称相似，但在其他方面完全无关。Swarm完全由聊天完成API提供支持，因此在调用之间是无状态的。
 
-## Why Swarm
+##为什么选择Swarm
 
-Swarm explores patterns that are lightweight, scalable, and highly customizable by design. Approaches similar to Swarm are best suited for situations dealing with a large number of independent capabilities and instructions that are difficult to encode into a single prompt.
+Swarm探索了轻量级、可扩展和高度可定制的设计模式。类似于Swarm的方法最适合处理大量独立功能和指令的情况，这些功能和指令很难编码到单个提示中。
 
-The Assistants API is a great option for developers looking for fully-hosted threads and built in memory management and retrieval. However, Swarm is an educational resource for developers curious to learn about multi-agent orchestration. Swarm runs (almost) entirely on the client and, much like the Chat Completions API, does not store state between calls.
+助理API对于寻找完整托管线程和内置内存管理和检索的开发人员来说是一个很好的选择。然而，Swarm是一个教育资源，供那些想了解多代理编排的开发人员使用。Swarm（几乎）完全在客户端上运行，与Chat Completions API非常相似，不存储调用之间的状态。
 
-# Examples
+#示例
 
-Check out `/examples` for inspiration! Learn more about each one in its README.
+查看“/示例”以获取灵感！在README中了解更多关于每一个的信息。
 
-- [`basic`](examples/basic): Simple examples of fundamentals like setup, function calling, handoffs, and context variables
-- [`triage_agent`](examples/triage_agent): Simple example of setting up a basic triage step to hand off to the right agent
-- [`weather_agent`](examples/weather_agent): Simple example of function calling
-- [`airline`](examples/airline): A multi-agent setup for handling different customer service requests in an airline context.
-- [`support_bot`](examples/support_bot): A customer service bot which includes a user interface agent and a help center agent with several tools
-- [`personal_shopper`](examples/personal_shopper): A personal shopping agent that can help with making sales and refunding orders
+- [`basic`](examples/basic): 基本原理的简单示例，如设置、函数调用、切换和上下文变量
+- [`triage_agent`](examples/triage_agent): 设置基本分诊步骤以移交给正确代理的简单示例
+- [`weather_agent`](examples/weather_agent): 函数调用的简单示例
+- [`airline`](examples/airline): 在航空公司环境中处理不同客户服务请求的多代理设置。
+- [`support_bot`](examples/support_bot): 一个客户服务机器人，包括一个用户界面代理和一个带有多种工具的帮助中心代理
+- [`personal_shopper`](examples/personal_shopper): 可以帮助进行销售和退款订单的个人购物代理
 
-# Documentation
+# 文档
 
 ![Swarm Diagram](assets/swarm_diagram.png)
 
-## Running Swarm
+##运行Swarm
 
-Start by instantiating a Swarm client (which internally just instantiates an `OpenAI` client).
+首先实例化一个Swarm客户端（在内部只实例化一个“OpenAI”客户端）。
 
 ```python
 from swarm import Swarm
@@ -115,58 +115,59 @@ client = Swarm()
 
 ### `client.run()`
 
-Swarm's `run()` function is analogous to the `chat.completions.create()` function in the Chat Completions API – it takes `messages` and returns `messages` and saves no state between calls. Importantly, however, it also handles Agent function execution, hand-offs, context variable references, and can take multiple turns before returning to the user.
+Swarm的“run（）”函数类似于chat Complementations API中的“chat.completions.create（）”功能——它接收“消息”并返回“消息”，并且在调用之间不保存状态。然而，重要的是，它还处理代理函数执行、切换、上下文变量引用，并且可以在返回给用户之前进行多次轮换。
 
-At its core, Swarm's `client.run()` implements the following loop:
+Swarm的`client.run（）`实现了以下循环：
 
-1. Get a completion from the current Agent
-2. Execute tool calls and append results
-3. Switch Agent if necessary
-4. Update context variables, if necessary
-5. If no new function calls, return
+1.从当前代理处获取完成信息
+2.执行工具调用并附加结果
+3.必要时切换代理
+4.必要时更新上下文变量
+5.如果没有新函数调用，则返回
 
 #### Arguments
 
 | Argument              | Type    | Description                                                                                                                                            | Default        |
 | --------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- |
-| **agent**             | `Agent` | The (initial) agent to be called.                                                                                                                      | (required)     |
-| **messages**          | `List`  | A list of message objects, identical to [Chat Completions `messages`](https://platform.openai.com/docs/api-reference/chat/create#chat-create-messages) | (required)     |
-| **context_variables** | `dict`  | A dictionary of additional context variables, available to functions and Agent instructions                                                            | `{}`           |
-| **max_turns**         | `int`   | The maximum number of conversational turns allowed                                                                                                     | `float("inf")` |
-| **model_override**    | `str`   | An optional string to override the model being used by an Agent                                                                                        | `None`         |
-| **execute_tools**     | `bool`  | If `False`, interrupt execution and immediately returns `tool_calls` message when an Agent tries to call a function                                    | `True`         |
-| **stream**            | `bool`  | If `True`, enables streaming responses                                                                                                                 | `False`        |
-| **debug**             | `bool`  | If `True`, enables debug logging                                                                                                                       | `False`        |
+| **agent**             | `Agent` | 要呼叫的（初始）代理。                                                                                                                 | (required)     |
+| **messages**          | `List`  | 消息对象列表，与 [Chat Completions `messages`](https://platform.openai.com/docs/api-reference/chat/create#chat-create-messages) | (required)     |
+| **context_variables** | `dict`  | 附加上下文变量的字典，可用于函数和代理指令                                                            | `{}`           |
+| **max_turns**         | `int`   | 允许的最大会话回合数                                                                                                    | `float("inf")` |
+| **model_override**    | `str`   | 一个可选字符串，用于覆盖代理正在使用的模型                                                                                     | `None`         |
+| **execute_tools**     | `bool`  | 如果为“False”，则中断执行，并在代理尝试调用函数时立即返回“tool_calls”消息                                   | `True`         |
+| **stream**            | `bool`  | 如果为“True”，则启用流式响应
+                                                                                                                 | `False`        |
+| **debug**             | `bool`  | 如果为True，则启用调试日志记录                                                                                                                       | `False`        |
 
-Once `client.run()` is finished (after potentially multiple calls to agents and tools) it will return a `Response` containing all the relevant updated state. Specifically, the new `messages`, the last `Agent` to be called, and the most up-to-date `context_variables`. You can pass these values (plus new user messages) in to your next execution of `client.run()` to continue the interaction where it left off – much like `chat.completions.create()`. (The `run_demo_loop` function implements an example of a full execution loop in `/swarm/repl/repl.py`.)
+一旦`client.run（）`完成（在可能多次调用代理和工具之后），它将返回一个包含所有相关更新状态的`Response`。具体来说，新的“消息”、要调用的最后一个“代理”和最新的“context_variables”。您可以将这些值（加上新用户消息）传递给下一次执行`client.run（）`，以继续它停止的交互——就像`chat.coompletions.create（）`一样。（`run_demo_loop`函数在`/swarm/repl/repl.py `中实现了一个完整执行循环的示例。）
 
 #### `Response` Fields
 
 | Field                 | Type    | Description                                                                                                                                                                                                                                                                  |
 | --------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **messages**          | `List`  | A list of message objects generated during the conversation. Very similar to [Chat Completions `messages`](https://platform.openai.com/docs/api-reference/chat/create#chat-create-messages), but with a `sender` field indicating which `Agent` the message originated from. |
-| **agent**             | `Agent` | The last agent to handle a message.                                                                                                                                                                                                                                          |
-| **context_variables** | `dict`  | The same as the input variables, plus any changes.                                                                                                                                                                                                                           |
+| **messages**          | `List`  |对话期间生成的消息对象列表。非常类似于 [Chat Completions `messages`](https://platform.openai.com/docs/api-reference/chat/create#chat-create-messages), 但带有一个“发送者”字段，指示消息来自哪个“代理”。 |
+| **agent**             | `Agent` | 处理消息的最后一个代理。                                                                                                                                                                                                                                          |
+| **context_variables** | `dict`  |与输入变量相同，加上任何更改。                                                                                                                                                                                                                           |
 
-## Agents
+## 代理人
 
-An `Agent` simply encapsulates a set of `instructions` with a set of `functions` (plus some additional settings below), and has the capability to hand off execution to another `Agent`.
+“代理”只是将一组“指令”与一组“函数”（加上下面的一些附加设置）封装在一起，并能够将执行权移交给另一个“代理”。
 
-While it's tempting to personify an `Agent` as "someone who does X", it can also be used to represent a very specific workflow or step defined by a set of `instructions` and `functions` (e.g. a set of steps, a complex retrieval, single step of data transformation, etc). This allows `Agent`s to be composed into a network of "agents", "workflows", and "tasks", all represented by the same primitive.
+虽然人们很容易将“代理”拟人化为“做X的人”，但它也可以用来表示由一组“指令”和“函数”定义的非常具体的工作流程或步骤（例如一组步骤、复杂的检索、数据转换的单个步骤等）。这允许将“代理”组成一个由“代理”、“工作流”和“任务”组成的网络，所有这些都由同一个原语表示。
 
 ## `Agent` Fields
 
 | Field            | Type                     | Description                                                                   | Default                      |
 | ---------------- | ------------------------ | ----------------------------------------------------------------------------- | ---------------------------- |
-| **name**         | `str`                    | The name of the agent.                                                        | `"Agent"`                    |
-| **model**        | `str`                    | The model to be used by the agent.                                            | `"gpt-4o"`                   |
-| **instructions** | `str` or `func() -> str` | Instructions for the agent, can be a string or a callable returning a string. | `"You are a helpful agent."` |
-| **functions**    | `List`                   | A list of functions that the agent can call.                                  | `[]`                         |
-| **tool_choice**  | `str`                    | The tool choice for the agent, if any.                                        | `None`                       |
+| **name**         | `str`                    | 代理人的姓名。                                                                 | `"Agent"`                    |
+| **model**        | `str`                    | 代理人使用的模型。                                                             | `"gpt-4o"`                   |
+| **instructions** | `str` or `func() -> str` | 代理的指令可以是字符串，也可以是返回字符串的可调用指令。                           | `"You are a helpful agent."` |
+| **functions**    | `List`                   | 代理可以调用的函数列表。                                                        | `[]`                         |
+| **tool_choice**  | `str`                    | 代理的工具选择（如果有的话）。                                                  | `None`                       |
 
-### Instructions
+### 使用说明
 
-`Agent` `instructions` are directly converted into the `system` prompt of a conversation (as the first message). Only the `instructions` of the active `Agent` will be present at any given time (e.g. if there is an `Agent` handoff, the `system` prompt will change, but the chat history will not.)
+`代理的“指令”直接转换为对话的“系统”提示（作为第一条消息）。在任何给定时间，只有活动“代理”的“指令”会出现（例如，如果有“代理”切换，“系统”提示会改变，但聊天历史不会改变。）
 
 ```python
 agent = Agent(
@@ -174,7 +175,7 @@ agent = Agent(
 )
 ```
 
-The `instructions` can either be a regular `str`, or a function that returns a `str`. The function can optionally receive a `context_variables` parameter, which will be populated by the `context_variables` passed into `client.run()`.
+“指令”可以是常规的“str”，也可以是返回“str”的函数。该函数可以选择接收一个`context_variables`参数，该参数将由传递到`client.run（）`的`context-variables`填充。
 
 ```python
 def instructions(context_variables):
@@ -196,12 +197,12 @@ print(response.messages[-1]["content"])
 Hi John, how can I assist you today?
 ```
 
-## Functions
+##功能
 
-- Swarm `Agent`s can call python functions directly.
-- Function should usually return a `str` (values will be attempted to be cast as a `str`).
-- If a function returns an `Agent`, execution will be transfered to that `Agent`.
-- If a function defines a `context_variables` parameter, it will be populated by the `context_variables` passed into `client.run()`.
+-Swarm“Agent”可以直接调用python函数。
+-函数通常应返回“str”（将尝试将值转换为“str”）。
+-如果函数返回“Agent”，则执行将转移到该“Agent”。
+-如果一个函数定义了一个`context_variables`参数，它将由传递给`client.run（）`的`context-variables`填充。
 
 ```python
 def greet(context_variables, language):
@@ -222,15 +223,15 @@ client.run(
 ```
 
 ```
-Hola, John!
+你好，约翰！
 ```
 
-- If an `Agent` function call has an error (missing function, wrong argument, error) an error response will be appended to the chat so the `Agent` can recover gracefully.
-- If multiple functions are called by the `Agent`, they will be executed in that order.
+-如果“Agent”函数调用有错误（缺少函数、参数错误、错误），则会在聊天中附加错误响应，以便“Agent”可以正常恢复。
+-如果“Agent”调用了多个函数，它们将按此顺序执行。
 
-### Handoffs and Updating Context Variables
+###切换和更新上下文变量
 
-An `Agent` can hand off to another `Agent` by returning it in a `function`.
+一个“代理”可以通过在“函数”中返回它来切换到另一个“代理人”。
 
 ```python
 sales_agent = Agent(name="Sales Agent")
@@ -245,10 +246,10 @@ print(response.agent.name)
 ```
 
 ```
-Sales Agent
+销售代理
 ```
 
-It can also update the `context_variables` by returning a more complete `Result` object. This can also contain a `value` and an `agent`, in case you want a single function to return a value, update the agent, and update the context variables (or any subset of the three).
+它还可以通过返回更完整的“Result”对象来更新“context_variables”。这也可以包含一个“值”和一个“代理”，以防您希望单个函数返回值、更新代理和更新上下文变量（或这三个变量的任何子集）。
 
 ```python
 sales_agent = Agent(name="Sales Agent")
@@ -278,16 +279,16 @@ Sales Agent
 ```
 
 > [!NOTE]
-> If an `Agent` calls multiple functions to hand-off to an `Agent`, only the last handoff function will be used.
+>如果“Agent”调用多个函数来切换到“Agent”，则只会使用最后一个切换函数。
 
-### Function Schemas
+###函数模式
 
-Swarm automatically converts functions into a JSON Schema that is passed into Chat Completions `tools`.
+Swarm会自动将函数转换为JSON模式，并传递给聊天完成“工具”。
 
-- Docstrings are turned into the function `description`.
-- Parameters without default values are set to `required`.
-- Type hints are mapped to the parameter's `type` (and default to `string`).
-- Per-parameter descriptions are not explicitly supported, but should work similarly if just added in the docstring. (In the future docstring argument parsing may be added.)
+-文档字符串被转化为函数“description”。
+-没有默认值的参数设置为“必需”。
+-类型提示被映射到参数的“Type”（默认为“string”）。
+-没有明确支持每个参数的描述，但如果只是添加到docstring中，则应该类似地工作。（将来可能会添加docstring参数解析。）
 
 ```python
 def greet(name, age: int, location: str = "New York"):
@@ -328,20 +329,20 @@ for chunk in stream:
    print(chunk)
 ```
 
-Uses the same events as [Chat Completions API streaming](https://platform.openai.com/docs/api-reference/streaming). See `process_and_print_streaming_response` in `/swarm/repl/repl.py` as an example.
+使用与[聊天完成API流式处理]相同的事件(https://platform.openai.com/docs/api-reference/streaming). 请参阅“/swarm/repl/repl.py”中的“process_and_print_streaming_response”作为示例。
 
-Two new event types have been added:
+新增了两种事件类型：
 
 - `{"delim":"start"}` and `{"delim":"start"}`, to signal each time an `Agent` handles a single message (response or function call). This helps identify switches between `Agent`s.
 - `{"response": Response}` will return a `Response` object at the end of a stream with the aggregated (complete) response, for convenience.
 
-# Evaluations
+#评价
 
-Evaluations are crucial to any project, and we encourage developers to bring their own eval suites to test the performance of their swarms. For reference, we have some examples for how to eval swarm in the `airline`, `weather_agent` and `triage_agent` quickstart examples. See the READMEs for more details.
+评估对任何项目都至关重要，我们鼓励开发人员带来自己的eval套件来测试他们的集群的性能。作为参考，我们在“airline”、“weather_agent”和“triage_agent”快速入门示例中有一些如何评估swarm的示例。有关更多详细信息，请参阅README。
 
-# Utils
+#Utils
 
-Use the `run_demo_loop` to test out your swarm! This will run a REPL on your command line. Supports streaming.
+使用`run_demo_loop`测试你的蜂群！这将在您的命令行上运行REPL。支持流媒体。
 
 ```python
 from swarm.repl import run_demo_loop
