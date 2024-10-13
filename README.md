@@ -54,9 +54,9 @@ print(response.messages[-1]["content"])
 ```
 
 ```
-Hope glimmers brightly,
-New paths converge gracefully,
-What can I assist?
+希望之光闪闪发光，
+新的路径优雅地汇聚，
+我能帮什么忙？
 ```
 
 ## Table of Contents
